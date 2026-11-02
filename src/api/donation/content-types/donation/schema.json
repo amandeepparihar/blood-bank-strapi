@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "donations",
+  "info": {
+    "singularName": "donation",
+    "pluralName": "donations",
+    "displayName": "Donation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "mobileNo": {
+      "type": "biginteger",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "bloodGroup": {
+      "type": "enumeration",
+      "required": true,
+      "default": "A-positive",
+      "enum": [
+        "A-positive",
+        "A-negative",
+        "B-positive",
+        "B-negative",
+        "O-positive",
+        "O-negative"
+      ]
+    },
+    "medical_condition_description": {
+      "type": "text"
+    }
+  }
+}

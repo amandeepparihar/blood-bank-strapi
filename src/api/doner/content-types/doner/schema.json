@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "doners",
+  "info": {
+    "singularName": "doner",
+    "pluralName": "doners",
+    "displayName": "Doner"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "gender": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Male",
+        "Female",
+        "Others"
+      ]
+    },
+    "dob": {
+      "type": "date",
+      "required": true
+    },
+    "bloodGroup": {
+      "type": "enumeration",
+      "required": true,
+      "default": "A-positive",
+      "enum": [
+        "A-positive",
+        "A-negative",
+        "B-positive",
+        "B-negative",
+        "O-positive",
+        "O-negative"
+      ]
+    },
+    "mobileNo": {
+      "type": "biginteger",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "string",
+      "required": true
+    },
+    "district": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "late_date_of_donation": {
+      "type": "date"
+    },
+    "donated_previously": {
+      "type": "boolean",
+      "required": true
+    },
+    "last_six_months": {
+      "type": "enumeration",
+      "default": "No",
+      "enum": [
+        "No",
+        "Tattooing",
+        "Piercing",
+        "Dental extraction"
+      ]
+    },
+    "agree_to_be_contacted": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  }
+}
