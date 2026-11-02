@@ -52,6 +52,11 @@
       "relation": "manyToOne",
       "target": "api::city.city",
       "inversedBy": "donations"
+    },
+    "isApproved": {
+      "type": "boolean",
+      "required": true,
+      "default": false
     }
   }
 }
