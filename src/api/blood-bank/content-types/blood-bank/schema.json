@@ -17,19 +17,26 @@
     },
     "contactNo": {
       "type": "biginteger",
-      "required": true
-    },
-    "city": {
-      "type": "string",
-      "required": true
-    },
-    "state": {
-      "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "address": {
       "type": "text",
       "required": true
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "required": true,
+      "inversedBy": "blood_banks"
+    },
+    "state": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::state.state",
+      "required": true,
+      "inversedBy": "blood_banks"
     }
   }
 }

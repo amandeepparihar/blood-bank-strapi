@@ -455,8 +455,11 @@ export interface ApiBloodBankBloodBank extends Struct.CollectionTypeSchema {
   };
   attributes: {
     address: Schema.Attribute.Text & Schema.Attribute.Required;
-    city: Schema.Attribute.String & Schema.Attribute.Required;
-    contactNo: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'> &
+      Schema.Attribute.Required;
+    contactNo: Schema.Attribute.BigInteger &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -468,7 +471,8 @@ export interface ApiBloodBankBloodBank extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    state: Schema.Attribute.String & Schema.Attribute.Required;
+    state: Schema.Attribute.Relation<'manyToOne', 'api::state.state'> &
+      Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -486,11 +490,17 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    blood_banks: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blood-bank.blood-bank'
+    >;
     cityName: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     district: Schema.Attribute.Relation<'manyToOne', 'api::district.district'>;
+    donations: Schema.Attribute.Relation<'oneToMany', 'api::donation.donation'>;
+    doners: Schema.Attribute.Relation<'oneToMany', 'api::doner.doner'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::city.city'> &
       Schema.Attribute.Private;
@@ -517,6 +527,7 @@ export interface ApiDistrictDistrict extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     districtName: Schema.Attribute.String & Schema.Attribute.Unique;
+    doners: Schema.Attribute.Relation<'oneToMany', 'api::doner.doner'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -554,11 +565,13 @@ export interface ApiDonationDonation extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'A-positive'>;
-    city: Schema.Attribute.String & Schema.Attribute.Required;
+    city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -566,10 +579,12 @@ export interface ApiDonationDonation extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     medical_condition_description: Schema.Attribute.Text;
-    mobileNo: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    mobileNo: Schema.Attribute.BigInteger &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    state: Schema.Attribute.String & Schema.Attribute.Required;
+    state: Schema.Attribute.Relation<'manyToOne', 'api::state.state'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -602,18 +617,20 @@ export interface ApiDonerDoner extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'A-positive'>;
-    city: Schema.Attribute.String & Schema.Attribute.Required;
+    city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    district: Schema.Attribute.String & Schema.Attribute.Required;
+    district: Schema.Attribute.Relation<'manyToOne', 'api::district.district'>;
     dob: Schema.Attribute.Date & Schema.Attribute.Required;
     donated_previously: Schema.Attribute.Boolean & Schema.Attribute.Required;
-    email: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     fullName: Schema.Attribute.String & Schema.Attribute.Required;
     gender: Schema.Attribute.Enumeration<['Male', 'Female', 'Others']> &
       Schema.Attribute.Required;
-    last_six_months: Schema.Attribute.Enumeration<
+    last_six_months_have_you_had_any_of_the_following: Schema.Attribute.Enumeration<
       ['No', 'Tattooing', 'Piercing', 'Dental extraction']
     > &
       Schema.Attribute.DefaultTo<'No'>;
@@ -621,9 +638,11 @@ export interface ApiDonerDoner extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::doner.doner'> &
       Schema.Attribute.Private;
-    mobileNo: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    mobileNo: Schema.Attribute.BigInteger &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    state: Schema.Attribute.String & Schema.Attribute.Required;
+    state: Schema.Attribute.Relation<'manyToOne', 'api::state.state'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -641,10 +660,16 @@ export interface ApiStateState extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    blood_banks: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blood-bank.blood-bank'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     districts: Schema.Attribute.Relation<'oneToMany', 'api::district.district'>;
+    donations: Schema.Attribute.Relation<'oneToMany', 'api::donation.donation'>;
+    doners: Schema.Attribute.Relation<'oneToMany', 'api::doner.doner'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::state.state'> &
       Schema.Attribute.Private;

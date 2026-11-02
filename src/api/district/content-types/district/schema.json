@@ -26,6 +26,12 @@
       "relation": "oneToMany",
       "target": "api::city.city",
       "mappedBy": "district"
+    },
+    "doners": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::doner.doner",
+      "mappedBy": "district"
     }
   }
 }

@@ -20,6 +20,24 @@
       "relation": "manyToOne",
       "target": "api::district.district",
       "inversedBy": "cities"
+    },
+    "donations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::donation.donation",
+      "mappedBy": "city"
+    },
+    "doners": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::doner.doner",
+      "mappedBy": "city"
+    },
+    "blood_banks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blood-bank.blood-bank",
+      "mappedBy": "city"
     }
   }
 }

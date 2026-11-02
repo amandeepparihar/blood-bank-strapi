@@ -43,23 +43,13 @@
     },
     "mobileNo": {
       "type": "biginteger",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "email": {
       "type": "string",
-      "required": true
-    },
-    "state": {
-      "type": "string",
-      "required": true
-    },
-    "district": {
-      "type": "string",
-      "required": true
-    },
-    "city": {
-      "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "late_date_of_donation": {
       "type": "date"
@@ -68,7 +58,7 @@
       "type": "boolean",
       "required": true
     },
-    "last_six_months": {
+    "last_six_months_have_you_had_any_of_the_following": {
       "type": "enumeration",
       "default": "No",
       "enum": [
@@ -82,6 +72,24 @@
       "type": "boolean",
       "required": true,
       "default": true
+    },
+    "state": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::state.state",
+      "inversedBy": "doners"
+    },
+    "district": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::district.district",
+      "inversedBy": "doners"
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "doners"
     }
   }
 }

@@ -17,19 +17,13 @@
     },
     "mobileNo": {
       "type": "biginteger",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "email": {
       "type": "string",
-      "required": true
-    },
-    "state": {
-      "type": "string",
-      "required": true
-    },
-    "city": {
-      "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "bloodGroup": {
       "type": "enumeration",
@@ -46,6 +40,18 @@
     },
     "medical_condition_description": {
       "type": "text"
+    },
+    "state": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::state.state",
+      "inversedBy": "donations"
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "donations"
     }
   }
 }

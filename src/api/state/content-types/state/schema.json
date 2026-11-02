@@ -19,6 +19,24 @@
       "relation": "oneToMany",
       "target": "api::district.district",
       "mappedBy": "state"
+    },
+    "donations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::donation.donation",
+      "mappedBy": "state"
+    },
+    "doners": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::doner.doner",
+      "mappedBy": "state"
+    },
+    "blood_banks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blood-bank.blood-bank",
+      "mappedBy": "state"
     }
   }
 }
